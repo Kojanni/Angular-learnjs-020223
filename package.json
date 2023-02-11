@@ -10,7 +10,9 @@
 		"test": "ng test",
 		"prettier:fix": "prettier --write",
 		"prettier:fix:all": "prettier --write .",
-		"lint": "ng lint"
+		"lint": "ng lint",
+		"prepare": "husky install"
+
 	},
 	"private": true,
 	"dependencies": {
