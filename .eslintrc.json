@@ -26,6 +26,17 @@
 						"prefix": "app",
 						"style": "kebab-case"
 					}
+				],
+				"@typescript-eslint/naming-convertion": [
+					"warning",
+					{
+						"selector": "interface",
+						"format": ["PascalCase"],
+						"custom": {
+							"regex": "I[A-Z]",
+							"match": true
+						}
+					}
 				]
 			}
 		},
