@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { IProductsFilter } from './products-filter.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-filter',
@@ -39,8 +40,10 @@ export class FilterComponent implements OnChanges {
 		}),
 	});
 
-	constructor(private readonly formBuilder: FormBuilder) // private readonly formGroupName: FormGroupName,
-	{
+	constructor(
+		private readonly formBuilder: FormBuilder,
+		private router: Router, // private readonly formGroupName: FormGroupName,
+	) {
 		// this.formGroupName.control
 
 		this.filterForm.valueChanges.subscribe(formValue => {
@@ -70,11 +73,21 @@ export class FilterComponent implements OnChanges {
 		}
 	}
 
+	appendAQueryParam(paramKey: string, paramValue: string) {
+		const urlTree = this.router.createUrlTree([], {
+			queryParams: { paramKey: paramValue },
+			queryParamsHandling: 'merge',
+			preserveFragment: true,
+		});
+
+		this.router.navigateByUrl(urlTree);
+	}
+
 	onSubmit(formValue: unknown) {
 		// console.log(formValue);
 	}
 
-	private getPrandsList(brandsActiveFlags: boolean[]): IProductsFilter['brands'] {
+	private getBrandsList(brandsActiveFlags: boolean[]): IProductsFilter['brands'] {
 		if (!this.brands) {
 			return [];
 		}
